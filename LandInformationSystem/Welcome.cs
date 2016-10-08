@@ -13,7 +13,7 @@ namespace StudentMgtSystemWebForm
 {
     public partial class Welcome : Form
     {
-        string filename;
+        string filename, outputfile;
 
         public Welcome()
         {
@@ -114,14 +114,14 @@ namespace StudentMgtSystemWebForm
                 //The sorted data will be copied to the new var list 
                 var sortedlist = studentlist.OrderByDescending(s => s.Marks).ThenBy(s1 => s1.FirstName);
 
-                //Writing the sported output data to both console and output file.
-                //System.Console.WriteLine("**************************** SORTED DATA ******************************");
+                //Creating the output file path using the input file path.          
+                string fileExt = Path.GetExtension(filename);
+                string fileNameWoExt = Path.GetFileNameWithoutExtension(filename);
+                string dirPath = Path.GetDirectoryName(filename);
+                outputfile = dirPath + "\\" + fileNameWoExt + "-sorted" + fileExt;
 
-                // Finally writing the sorted data to the output file.
-                // NOTE: It is always advisable to not to use FileStream for text files because it writes bytes, but StreamWriter
-                // encodes the output as text.
                 using (System.IO.StreamWriter file =
-                    new System.IO.StreamWriter(@"H:\StudentMgtSystem\StudentDataInput-graded.txt"))
+                    new System.IO.StreamWriter(outputfile))
                 {
                     foreach (Student s in sortedlist)
                     {
