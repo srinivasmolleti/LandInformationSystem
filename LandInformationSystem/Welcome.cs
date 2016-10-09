@@ -34,7 +34,7 @@ namespace StudentMgtSystemWebForm
                 this.Close();
                 Form1 frmObj = new Form1();
                 frmObj.Close();
-                Application.Exit();
+                Application.Exit()
             }
 
         }
